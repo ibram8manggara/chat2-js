@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabung ke Ruang</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Gabung ke Ruang</h1>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <input type="text" id="room-input" class="form-control mb-2" placeholder="Masukkan ID Ruang...">
+                <input type="text" id="name-input" class="form-control mb-2" placeholder="Nama Anda...">
+                <button id="join-button" class="btn btn-success btn-block">Gabung</button>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+    <script>
+        const joinButton = document.getElementById("join-button");
+        const roomInput = document.getElementById("room-input");
+        const nameInput = document.getElementById("name-input");
+
+        joinButton.addEventListener("click", () => {
+            const roomID = roomInput.value.trim();
+            const userName = nameInput.value.trim();
+
+            if (roomID !== "" && userName !== "") {
+                window.location.href = `/room.html?roomID=${roomID}&userName=${userName}`;
+            }
+        });
+    </script>
+</body>
+</html>
