@@ -1,4 +1,4 @@
-# chat2-js
+# chatroom-js
 tahap awal & instalasi
 
 ```
