@@ -17,3 +17,5 @@ node server.js
 # Noted
 ubah dahulu port yang ingin digunakan pada server.js
 dengan cara masuk pada kode file, dibagian bawah
+
+This chat room was made by Ibram Anggara Feat Baratha wijaya & Damar Fikri
