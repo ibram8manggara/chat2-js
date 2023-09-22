@@ -1,31 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruang Chat</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/styleRoom.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
+
 <body>
     <div class="container">
-        <h1 class="text-center">Ruang Chat</h1>
+        <div class="header">
+            <h1>Ruang Chat</h1>
+            <div class="icons">
+                <button id="notification-button" class="icon-button">
+                    <iconify-icon icon="memory:notification"></iconify-icon>
+                </button>
+                <button id="logout-button" class="icon-button">
+                    <iconify-icon icon="el:off"></iconify-icon>
+                </button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-3">
                 <div class="alert alert-info mt-4">
-                    Selamat datang di ruang chat! Anda berada di ruang dengan ID:
-                    <strong id="room-id"></strong> sebagai <strong id="user-name"></strong>
+                    Selamat datang di ruang chat!
+                    <strong id="room-id"></strong> ID :<strong id="user-name"></strong>
                 </div>
             </div>
             <div class="col-md-9">
-                <div id="message-container" class="border p-3" style="height: 300px; overflow-y: scroll;"></div>
-                <input type="text" id="message-input" class="form-control mb-2" placeholder="Ketik pesan Anda...">
-                <button id="send-button" class="btn btn-success btn-block">Kirim</button>
+                <div id="message-container" class="message-container">
+                </div>
+                <div class="input-container">
+                    <input type="text" id="message-input" class="form-control" placeholder="Message">
+                    <button id="send-button" class="btn btn-success">
+                        <iconify-icon icon="material-symbols:send"></iconify-icon>
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
-
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        // Mendapatkan elemen dengan ID "user-name"
+        const userNameElement = document.getElementById("user-name");
+
+        // Daftar warna yang akan digunakan untuk nama pengguna
+        const userColors = ["#ff5733", "#33ff57", "#5733ff", "#ff33ab"];
+
+        //Warna acak
+        const randomColor = userColors[Math.floor(Math.random() * userColors.length)];
+
+        //Warna teks nama pengguna
+        userNameElement.style.color = randomColor;
+
         const socket = io();
         const messageContainer = document.getElementById("message-container");
         const messageInput = document.getElementById("message-input");
@@ -34,17 +64,17 @@
 
         // Fungsi untuk menggulir ke bawah
         function scrollToBottom() {
-          messageContainer.scrollTop = messageContainer.scrollHeight;
+            messageContainer.scrollTop = messageContainer.scrollHeight;
         }
 
         // Event listener saat halaman dimuat
         window.addEventListener("load", () => {
-          scrollToBottom(); // Menggulir ke bawah saat halaman dimuat
+            scrollToBottom(); // Menggulir ke bawah saat halaman dimuat
         });
 
         // Event listener saat ada pesan baru
         socket.on("chatMessage", () => {
-          scrollToBottom(); // Menggulir ke bawah saat ada pesan baru
+            scrollToBottom(); // Menggulir ke bawah saat ada pesan baru
         });
 
         const params = new URLSearchParams(window.location.search);
@@ -60,7 +90,10 @@
             const message = messageInput.value;
             if (message.trim() !== "") {
                 const fullMessage = `${userName}: ${message}`;
-                socket.emit("chatMessage", { roomID, message: fullMessage });
+                socket.emit("chatMessage", {
+                    roomID,
+                    message: fullMessage
+                });
                 messageInput.value = "";
             }
         }
@@ -85,7 +118,10 @@
         }
 
         // Bergabung ke ruang chat
-        socket.emit("joinRoom", { roomID, userName });
+        socket.emit("joinRoom", {
+            roomID,
+            userName
+        });
 
         // Mendengarkan pesan yang diterima
         socket.on("chatMessage", (data) => {
@@ -93,4 +129,5 @@
         });
     </script>
 </body>
+
 </html>
