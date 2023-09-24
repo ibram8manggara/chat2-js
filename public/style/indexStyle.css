@@ -22,6 +22,33 @@ body {
     padding-left: 1px;
 }
 
+.circle-image {
+    width: 200px;
+    /* Sesuaikan ukuran yang Anda inginkan */
+    height: 200px;
+    /* Sesuaikan ukuran yang Anda inginkan */
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.circle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.center-text input,
+.center-text button {
+    display: block;
+    margin: 10px auto;
+}
+
 .container {
     margin: 20px auto;
     max-width: 600px;
@@ -99,7 +126,8 @@ h1 {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     margin: 50px auto;
-    max-width: 400px;
+    max-width: 500px;
+    height: 450px;
 }
 
 

@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room chat</title>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <link rel="stylesheet" href="style/styleIndex.css">
+    <link rel="stylesheet" href="style/indexStyle.css">
+    <script src="script/index.js"></script>
 </head>
 
 <body class="darkMode">
     <div id="login" dir="ltr">
         <form id="Login" class="loginForm" dir="ltr">
             <div class="box">
-                <h2>Masukkan ID Ruang dan Nama Anda</h2>
-                <input type="text" id="room-input" class="form-control mb-2" placeholder="Masukkan ID Ruang...">
+                <div class="circle-image">
+                    <img src="asset/Logo.png" alt="">
+                </div>
+                <h2 class="center-text">Masukkan ID Ruang dan Nama Anda</h2>
+                <input type="text" id="room-input" class="form-control mb-2" placeholder="ID Ruang...">
                 <input type="text" id="name-input" class="form-control mb-2" placeholder="Nama Anda...">
                 <button id="join-button" class="btn btn-success btn-block">Gabung</button>
             </div>
@@ -23,18 +27,6 @@
     </div>
 </body>
 <script>
-    const joinButton = document.getElementById("join-button");
-    const roomInput = document.getElementById("room-input");
-    const nameInput = document.getElementById("name-input");
-
-    joinButton.addEventListener("click", () => {
-        const roomID = roomInput.value.trim();
-        const userName = nameInput.value.trim();
-
-        if (roomID !== "" && userName !== "") {
-            window.location.href = `/room.html?roomID=${roomID}&userName=${userName}`;
-        }
-    });
 </script>
 
 </html>
